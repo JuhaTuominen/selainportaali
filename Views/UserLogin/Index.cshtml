@@ -1,0 +1,47 @@
+﻿@model IEnumerable<SeaMODEPortal.Models.Login>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.BoatID)     @*Voi piilottaa valmiista versiosta*@
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UserName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PassWord)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AccessLvl)  @*Tämän voi piilottaa toimivasta sovelluksesta pois*@
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.BoatID)      @*Voi piilottaa valmiista versiosta*@
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UserName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PassWord)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AccessLvl)   @*Tämän voi piilottaa toimivasta sovelluksesta pois*@
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.LoginID }, new { @class = "fas fa-user-edit" })
+        </td>
+    </tr>
+}
+
+</table>

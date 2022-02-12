@@ -1,0 +1,33 @@
+﻿<nav class="navbar navbar-expand-lg navbar-light bg-custom-color">
+    <a class="navbar-brand" href="#">SeaMODE&#8482;</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse order-1" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active(2)">
+                <a class="nav-link" href="~/Home/LoggedIn">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="http://www.baltic-instruments.com/">Baltic Instruments</a>
+            </li>
+        </ul>
+    </div>
+    <div class="collapse navbar-collapse order-3" id="navbarSupportedContent">
+        <ul class="navbar-nav ml-auto">
+
+            <span style="font-size:2em;">
+                <li class="nav-item"><a class="nav-link fas fa-users-cog" href="~/BoatAdmin/Index">boatAdmin</a></li>
+                <li class="nav-item"><a class="nav-link fas fa-users-cog" href="~/MasterAdmin/Index">Master</a></li>
+                <li class="nav-item"><a class="nav-link fas fa-users-cog" href="~/UserLogin/Index">User</a></li>
+            </span>
+            <span style="font-size:2em;">
+                <li class="nav-item"><a class="nav-link fas fa-sign-out-alt" href="~/Home/LogOut"></a></li>
+                <span class="navbar-nav ml-auto order-3" style="font-size:0.5em">@Session["UserName"]</span>
+            </span>
+
+        </ul>
+    </div>
+
+</nav>

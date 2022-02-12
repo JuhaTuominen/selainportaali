@@ -1,0 +1,52 @@
+﻿@model SeaMODEPortal.Models.Login
+
+@{
+    ViewBag.Title = "Home Page";
+}
+
+@section scripts{
+    <script type="text/javascript">
+        $(window).on('load', function () {
+            if (@ViewBag.LoginError == 1) {
+                $('#ModalLogin').modal('show');
+            }
+        });
+    </script>
+    }
+
+
+
+<div class="row">
+    <div class="col-md-3"></div>
+    <div class="col-md-6">
+        <h2>
+            SeaMODE™ Customer Portal
+        </h2>
+        <p>
+            This site is intended for sailors and crew members using the SeaMODE™ 
+            Speed Lab or the SeaMODE™ Skiffbox that want to manage, archive and 
+            distribute logfiles and other kind of information related to sail boat 
+            racing and training.</p>
+
+        <p> If you already are a customer please register and take advantage of the services of the Portal.</p>
+            
+            If you do not have a SeaMODE™ system or Skiffbox, you can obtain more info on 
+            www.baltic-instruments.com (see link above) or from our sales sales@baltic-instruments.com
+            In brief the SeaMODE™ Customer Portal provides the following:
+
+        <ul>
+            <li>The establishment of a yacht or boat specific user account for one main user and up to 10 crew members</li>
+            <li>Means to allocate race or training event specific subsections for uploading log files and other types files (such as race notices, pictures and videos) within each subsection</li>
+            <li>Archiving and management of the event specific data</li>
+            <li>Means to collect and document various opinions and info also from the crew members</li>
+            <li>Enables downloading of stored log files and other info for further and future analysis and assessment in the crew members computers</li>
+        </ul>
+
+        <div class="col-md-3"></div>
+
+        </div>
+    </div>
+
+        @{
+            Html.RenderPartial("_LoginModal");
+        }
