@@ -1,0 +1,341 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="seamodeModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Boat">
+    <Key>
+      <PropertyRef Name="BoatID" />
+    </Key>
+    <Property Name="BoatID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="MemberID" Type="Int32" Nullable="false" />
+    <Property Name="RaceID" Type="Int32" Nullable="false" />
+    <Property Name="TrainingID" Type="Int32" Nullable="false" />
+    <Property Name="LoginID" Type="Int32" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Date" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="Login" Relationship="Self.FK_Boat_Login" FromRole="Boat" ToRole="Login" />
+    <NavigationProperty Name="Member" Relationship="Self.FK_Boat_Member" FromRole="Boat" ToRole="Member" />
+    <NavigationProperty Name="Race" Relationship="Self.FK_Boat_Race" FromRole="Boat" ToRole="Race" />
+    <NavigationProperty Name="Training" Relationship="Self.FK_Boat_Training" FromRole="Boat" ToRole="Training" />
+  </EntityType>
+  <EntityType Name="Conversation">
+    <Key>
+      <PropertyRef Name="ConversationID" />
+    </Key>
+    <Property Name="ConversationID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="RaceID" Type="Int32" />
+    <Property Name="TrainingID" Type="Int32" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Date" Type="DateTime" Precision="3" />
+    <Property Name="Conversation1" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Race" Relationship="Self.FK_Race_Conversation" FromRole="Conversation" ToRole="Race" />
+    <NavigationProperty Name="Training" Relationship="Self.FK_Training_Conversation" FromRole="Conversation" ToRole="Training" />
+  </EntityType>
+  <EntityType Name="Data">
+    <Key>
+      <PropertyRef Name="DataID" />
+    </Key>
+    <Property Name="DataID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ContentType" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Date" Type="DateTime" Precision="3" />
+    <Property Name="Data1" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <Property Name="Size" Type="Int32" />
+    <NavigationProperty Name="Race" Relationship="Self.FK_Race_Data" FromRole="Data" ToRole="Race" />
+    <NavigationProperty Name="Training" Relationship="Self.FK_Training_Data" FromRole="Data" ToRole="Training" />
+  </EntityType>
+  <EntityType Name="Login">
+    <Key>
+      <PropertyRef Name="LoginID" />
+    </Key>
+    <Property Name="LoginID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="BoatID" Type="Int32" Nullable="false" />
+    <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="PassWord" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Boat" Relationship="Self.FK_Boat_Login" FromRole="Login" ToRole="Boat" />
+    <Property Name="AccessLvl" Type="Int32" />
+  </EntityType>
+  <EntityType Name="Member">
+    <Key>
+      <PropertyRef Name="MemberID" />
+    </Key>
+    <Property Name="MemberID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="BoatID" Type="Int32" Nullable="false" />
+    <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Address" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="PostalCode" Type="Int32" />
+    <Property Name="PhoneNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Mail" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="MemberNumber" Type="Int32" />
+    <NavigationProperty Name="Boat" Relationship="Self.FK_Boat_Member" FromRole="Member" ToRole="Boat" />
+  </EntityType>
+  <EntityType Name="Picture">
+    <Key>
+      <PropertyRef Name="PictureID" />
+    </Key>
+    <Property Name="PictureID" Type="Int32" Nullable="false" />
+    <Property Name="RaceID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TrainingID" Type="Int32" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Data1" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <Property Name="ContentType" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="Size" Type="Int32" />
+    <NavigationProperty Name="Race" Relationship="Self.FK_Race_Picture" FromRole="Picture" ToRole="Race" />
+    <NavigationProperty Name="Training" Relationship="Self.FK_Training_Picture" FromRole="Picture" ToRole="Training" />
+  </EntityType>
+  <EntityType Name="Race">
+    <Key>
+      <PropertyRef Name="RaceID" />
+    </Key>
+    <Property Name="RaceID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="BoatID" Type="Int32" Nullable="false" />
+    <Property Name="DataID" Type="Int32" />
+    <Property Name="VideoID" Type="Int32" />
+    <Property Name="PictureID" Type="Int32" />
+    <Property Name="ConversationID" Type="Int32" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="Boat" Relationship="Self.FK_Boat_Race" FromRole="Race" ToRole="Boat" />
+    <NavigationProperty Name="Conversation" Relationship="Self.FK_Race_Conversation" FromRole="Race" ToRole="Conversation" />
+    <NavigationProperty Name="Data" Relationship="Self.FK_Race_Data" FromRole="Race" ToRole="Data" />
+    <NavigationProperty Name="Picture" Relationship="Self.FK_Race_Picture" FromRole="Race" ToRole="Picture" />
+    <NavigationProperty Name="Video" Relationship="Self.FK_Race_Video" FromRole="Race" ToRole="Video" />
+  </EntityType>
+  <EntityType Name="Training">
+    <Key>
+      <PropertyRef Name="TrainingID" />
+    </Key>
+    <Property Name="TrainingID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="BoatID" Type="Int32" Nullable="false" />
+    <Property Name="DataID" Type="Int32" />
+    <Property Name="VideoID" Type="Int32" />
+    <Property Name="PictureID" Type="Int32" />
+    <Property Name="ConversationID" Type="Int32" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="Boat" Relationship="Self.FK_Boat_Training" FromRole="Training" ToRole="Boat" />
+    <NavigationProperty Name="Conversation" Relationship="Self.FK_Training_Conversation" FromRole="Training" ToRole="Conversation" />
+    <NavigationProperty Name="Data" Relationship="Self.FK_Training_Data" FromRole="Training" ToRole="Data" />
+    <NavigationProperty Name="Picture" Relationship="Self.FK_Training_Picture" FromRole="Training" ToRole="Picture" />
+    <NavigationProperty Name="Video" Relationship="Self.FK_Training_Video" FromRole="Training" ToRole="Video" />
+  </EntityType>
+  <EntityType Name="Video">
+    <Key>
+      <PropertyRef Name="VideoID" />
+    </Key>
+    <Property Name="VideoID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="RaceID" Type="Int32" />
+    <Property Name="TrainigID" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="Name" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Data1" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <Property Name="ContentType" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="Size" Type="Int32" />
+    <NavigationProperty Name="Race" Relationship="Self.FK_Race_Video" FromRole="Video" ToRole="Race" />
+    <NavigationProperty Name="Training" Relationship="Self.FK_Training_Video" FromRole="Video" ToRole="Training" />
+  </EntityType>
+  <Association Name="FK_Boat_Login">
+    <End Role="Login" Type="Self.Login" Multiplicity="0..1" />
+    <End Role="Boat" Type="Self.Boat" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Login">
+        <PropertyRef Name="LoginID" />
+      </Principal>
+      <Dependent Role="Boat">
+        <PropertyRef Name="LoginID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Boat_Member">
+    <End Role="Member" Type="Self.Member" Multiplicity="1" />
+    <End Role="Boat" Type="Self.Boat" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Member">
+        <PropertyRef Name="MemberID" />
+      </Principal>
+      <Dependent Role="Boat">
+        <PropertyRef Name="MemberID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Boat_Race">
+    <End Role="Race" Type="Self.Race" Multiplicity="1" />
+    <End Role="Boat" Type="Self.Boat" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Race">
+        <PropertyRef Name="RaceID" />
+      </Principal>
+      <Dependent Role="Boat">
+        <PropertyRef Name="RaceID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Boat_Training">
+    <End Role="Training" Type="Self.Training" Multiplicity="1" />
+    <End Role="Boat" Type="Self.Boat" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Training">
+        <PropertyRef Name="TrainingID" />
+      </Principal>
+      <Dependent Role="Boat">
+        <PropertyRef Name="TrainingID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Race_Conversation">
+    <End Role="Conversation" Type="Self.Conversation" Multiplicity="0..1" />
+    <End Role="Race" Type="Self.Race" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Conversation">
+        <PropertyRef Name="ConversationID" />
+      </Principal>
+      <Dependent Role="Race">
+        <PropertyRef Name="ConversationID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Training_Conversation">
+    <End Role="Conversation" Type="Self.Conversation" Multiplicity="0..1" />
+    <End Role="Training" Type="Self.Training" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Conversation">
+        <PropertyRef Name="ConversationID" />
+      </Principal>
+      <Dependent Role="Training">
+        <PropertyRef Name="ConversationID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Race_Data">
+    <End Role="Data" Type="Self.Data" Multiplicity="0..1" />
+    <End Role="Race" Type="Self.Race" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Data">
+        <PropertyRef Name="DataID" />
+      </Principal>
+      <Dependent Role="Race">
+        <PropertyRef Name="DataID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Training_Data">
+    <End Role="Data" Type="Self.Data" Multiplicity="0..1" />
+    <End Role="Training" Type="Self.Training" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Data">
+        <PropertyRef Name="DataID" />
+      </Principal>
+      <Dependent Role="Training">
+        <PropertyRef Name="DataID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Race_Picture">
+    <End Role="Picture" Type="Self.Picture" Multiplicity="0..1" />
+    <End Role="Race" Type="Self.Race" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Picture">
+        <PropertyRef Name="PictureID" />
+      </Principal>
+      <Dependent Role="Race">
+        <PropertyRef Name="PictureID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Training_Picture">
+    <End Role="Picture" Type="Self.Picture" Multiplicity="0..1" />
+    <End Role="Training" Type="Self.Training" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Picture">
+        <PropertyRef Name="PictureID" />
+      </Principal>
+      <Dependent Role="Training">
+        <PropertyRef Name="PictureID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Race_Video">
+    <End Role="Video" Type="Self.Video" Multiplicity="0..1" />
+    <End Role="Race" Type="Self.Race" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Video">
+        <PropertyRef Name="VideoID" />
+      </Principal>
+      <Dependent Role="Race">
+        <PropertyRef Name="VideoID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Training_Video">
+    <End Role="Video" Type="Self.Video" Multiplicity="0..1" />
+    <End Role="Training" Type="Self.Training" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Video">
+        <PropertyRef Name="VideoID" />
+      </Principal>
+      <Dependent Role="Training">
+        <PropertyRef Name="VideoID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="seamodeEntities3" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Boat" EntityType="Self.Boat" />
+    <EntitySet Name="Conversation" EntityType="Self.Conversation" />
+    <EntitySet Name="Data" EntityType="Self.Data" />
+    <EntitySet Name="Login" EntityType="Self.Login" />
+    <EntitySet Name="Member" EntityType="Self.Member" />
+    <EntitySet Name="Picture" EntityType="Self.Picture" />
+    <EntitySet Name="Race" EntityType="Self.Race" />
+    <EntitySet Name="Training" EntityType="Self.Training" />
+    <EntitySet Name="Video" EntityType="Self.Video" />
+    <AssociationSet Name="FK_Boat_Login" Association="Self.FK_Boat_Login">
+      <End Role="Login" EntitySet="Login" />
+      <End Role="Boat" EntitySet="Boat" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Boat_Member" Association="Self.FK_Boat_Member">
+      <End Role="Member" EntitySet="Member" />
+      <End Role="Boat" EntitySet="Boat" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Boat_Race" Association="Self.FK_Boat_Race">
+      <End Role="Race" EntitySet="Race" />
+      <End Role="Boat" EntitySet="Boat" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Boat_Training" Association="Self.FK_Boat_Training">
+      <End Role="Training" EntitySet="Training" />
+      <End Role="Boat" EntitySet="Boat" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Race_Conversation" Association="Self.FK_Race_Conversation">
+      <End Role="Conversation" EntitySet="Conversation" />
+      <End Role="Race" EntitySet="Race" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Training_Conversation" Association="Self.FK_Training_Conversation">
+      <End Role="Conversation" EntitySet="Conversation" />
+      <End Role="Training" EntitySet="Training" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Race_Data" Association="Self.FK_Race_Data">
+      <End Role="Data" EntitySet="Data" />
+      <End Role="Race" EntitySet="Race" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Training_Data" Association="Self.FK_Training_Data">
+      <End Role="Data" EntitySet="Data" />
+      <End Role="Training" EntitySet="Training" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Race_Picture" Association="Self.FK_Race_Picture">
+      <End Role="Picture" EntitySet="Picture" />
+      <End Role="Race" EntitySet="Race" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Training_Picture" Association="Self.FK_Training_Picture">
+      <End Role="Picture" EntitySet="Picture" />
+      <End Role="Training" EntitySet="Training" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Race_Video" Association="Self.FK_Race_Video">
+      <End Role="Video" EntitySet="Video" />
+      <End Role="Race" EntitySet="Race" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Training_Video" Association="Self.FK_Training_Video">
+      <End Role="Video" EntitySet="Video" />
+      <End Role="Training" EntitySet="Training" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
